@@ -32,6 +32,11 @@
           Sign in
         </button>
       </div>
+      <div class="flex items-center justify-between">
+        <div class="text-sm">
+          Don't have account? <router-link :to="'/registration'" class="font-medium text-indigo-600 hover:text-indigo-500"> Sign up </router-link>
+        </div>
+      </div>
     </form>
   </div>
 </div>
