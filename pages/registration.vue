@@ -45,8 +45,6 @@
 </div>
 </template>
 <script>
-import * as firebase from 'firebase/app'
-import 'firebase/auth'
 export default {
   data() {
     return {
@@ -57,17 +55,17 @@ export default {
     }
   },
   methods: {
-    signup() {
-        if(this.password == this.password_confirm){
-        firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(data => {
-         this.$router.push('/')
-        }).catch(error=>{
+    async signup() {
+        try {
+            if(this.password == this.password_confirm){
+                await this.$fire.auth.createUserWithEmailAndPassword(this.email, this.password)
+                await this.$router.push('/')
+            }else{
+                this.error = 'Password did not match !'
+            }
+        } catch (error) {
             this.error = error
-        })
-        }else{
-            this.error = 'Password did not match !'
         }
-
     }
   }
 }

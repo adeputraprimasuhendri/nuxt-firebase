@@ -42,8 +42,6 @@
 </div>
 </template>
 <script>
-import * as firebase from 'firebase/app'
-import 'firebase/auth'
 export default {
   data() {
     return {
@@ -53,16 +51,13 @@ export default {
     }
   },
   methods: {
-    signin() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(data => {
-         this.$router.push('/')
-        })
-        .catch(error => {
-          this.error = error
-        })
+    async signin() {
+        try {
+            await this.$fire.auth.signInWithEmailAndPassword(this.email, this.password)
+            await this.$router.push('/')
+        } catch (error) {
+            this.error = error
+        }
     }
   }
 }
